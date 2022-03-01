@@ -19,3 +19,10 @@ assert.deepEqual([], flatten([]))
 assert.deepEqual([1, 2, 3, 4], flatten([1, 2, 3, 4]))
 assert.deepEqual([1, 2, 3, 4, 3, 4 ,5], flatten([1, [2, 3], 4, [3, [4, [5]]]]))
 assert.deepEqual([1, 2, 3], flatten([1, [[[2, 3]]]]))
+
+// Should handle arrays with elements of any type
+const objectArray = [{ value1: 1, value2: 2  }]
+assert.deepEqual(objectArray, flatten(objectArray))
+const mixedArray = ['one', [[1]], [{}, { value: 1 }, null], [[[[[[[[[NaN]]]]]]]]]]
+const mixedResult = ['one', 1, {}, { value: 1 }, null, NaN]
+assert.deepEqual(mixedResult, flatten(mixedArray))
